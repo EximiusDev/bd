@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.0.5" use-changelog="false" last-position="0,0" last-zoom="0.85" max-obj-count="22"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="pg_database_owner"
+ inherit="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<role name="dspace"
+ inherit="true"
+ login="true"
+ password="********">
+</role>
+
+<database name="p1" encoding="UTF8" lc-collate="en_US.UTF-8" lc-ctype="en_US.UTF-8" is-template="false" allow-conns="true">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="provincia" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2080" y="120"/>
+	<column name="idprovi" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nomprovi" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<constraint name="provincia_pk" type="pk-constr" table="public.provincia">
+		<columns names="idprovi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="actuacion" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="120"/>
+	<column name="nroactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="anioactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nroactua_fk">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="anioactua_fk">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="actuacion_pk" type="pk-constr" table="public.actuacion">
+		<columns names="nroactua,anioactua" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tematica" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1020" y="120"/>
+	<column name="idtema" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nomtema" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<constraint name="tematica_pk" type="pk-constr" table="public.tematica">
+		<columns names="idtema" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="nivel" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1700" y="640"/>
+	<column name="idnivel" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nomnivel" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<constraint name="nivel_pk" type="pk-constr" table="public.nivel">
+		<columns names="idnivel" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="localidad" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1600" y="120"/>
+	<column name="idloca" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nomloca" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<column name="idprovi" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="localidad_pk" type="pk-constr" table="public.localidad">
+		<columns names="idloca,idprovi" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="persona" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1060" y="320"/>
+	<column name="tipodocu" not-null="true">
+		<type name="character" length="3"/>
+	</column>
+	<column name="nrodocu" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idprovi" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idloca" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="apenom" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<column name="domiper" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<constraint name="persona_chk" type="ck-constr" table="public.persona">
+			<expression> <![CDATA[(tipodocu = ANY (ARRAY['DNI'::bpchar, 'LE'::bpchar, 'LC'::bpchar, 'PAS'::bpchar, 'OTR'::bpchar]))]]> </expression>
+	</constraint>
+	<constraint name="persona_pk" type="pk-constr" table="public.persona">
+		<columns names="tipodocu,nrodocu" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="entidad" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1120" y="660"/>
+	<column name="identidad" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idloca" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idprovi" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nomenti" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<column name="domienti" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<constraint name="entidad_pk" type="pk-constr" table="public.entidad">
+		<columns names="identidad" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="empleado" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1640" y="360"/>
+	<column name="idemple" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="tipodocu" not-null="true">
+		<type name="character" length="3"/>
+	</column>
+	<column name="nrodocu" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="feingre" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="empleado_pk" type="pk-constr" table="public.empleado">
+		<columns names="idemple" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tiene" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="480" y="120"/>
+	<column name="nroactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="anioactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idtema" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="observaciones" not-null="true">
+		<type name="character" length="255"/>
+	</column>
+	<constraint name="tiene_pk" type="pk-constr" table="public.tiene">
+		<columns names="nroactua,anioactua" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="oficina" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1160" y="940"/>
+	<column name="idofi" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idnivel" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nomofi" not-null="true">
+		<type name="character" length="32"/>
+	</column>
+	<column name="idemple" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idofi_fk">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idnivel_fk">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="oficina_pk" type="pk-constr" table="public.oficina">
+		<columns names="idofi,idnivel" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="presenta_persona" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="560" y="400"/>
+	<column name="tipodocu" not-null="true">
+		<type name="character" length="3"/>
+	</column>
+	<column name="nrodocu" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nroactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="anioactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="presenta_persona_pk" type="pk-constr" table="public.presenta_persona">
+		<columns names="tipodocu,nrodocu,nroactua,anioactua" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="presenta_entidad" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="580" y="700"/>
+	<column name="identidad" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nroactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="anioactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="presenta_entidad_pk" type="pk-constr" table="public.presenta_entidad">
+		<columns names="identidad,nroactua,anioactua" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="movimiento" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="620" y="960"/>
+	<column name="nromov" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nroactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="anioactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="feingreso" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="prioridad" not-null="true">
+		<type name="character" length="2"/>
+	</column>
+	<column name="observ" not-null="true">
+		<type name="character" length="255"/>
+	</column>
+	<column name="idofi" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idnivel" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fesalida">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="movimiento_chk" type="ck-constr" table="public.movimiento">
+			<expression> <![CDATA[(prioridad = ANY (ARRAY['AL'::bpchar, 'ME'::bpchar, 'BA'::bpchar]))]]> </expression>
+	</constraint>
+	<constraint name="movimiento_pk" type="pk-constr" table="public.movimiento">
+		<columns names="nromov,nroactua,anioactua" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="trabaja" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1740" y="840"/>
+	<column name="idemple" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="feinitra" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="idofi" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="idnivel" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fefintra">
+		<type name="date" length="0"/>
+	</column>
+	<column name="obstra">
+		<type name="character" length="255"/>
+	</column>
+	<constraint name="trabajo_pk" type="pk-constr" table="public.trabaja">
+		<columns names="idemple,feinitra" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="atiende" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1220" y="1280"/>
+	<column name="idemple" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nromov" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nroactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="anioactua" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="atiende_pk" type="pk-constr" table="public.atiende">
+		<columns names="idemple,nromov,nroactua,anioactua" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="actuacion_glose_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.actuacion" table="public.actuacion">
+	<columns names="nroactua_fk,anioactua_fk" ref-type="src-columns"/>
+	<columns names="nroactua,anioactua" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="localidad_provincia_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.provincia" table="public.localidad">
+	<columns names="idprovi" ref-type="src-columns"/>
+	<columns names="idprovi" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="persona_localidad_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.localidad" table="public.persona">
+	<columns names="idloca,idprovi" ref-type="src-columns"/>
+	<columns names="idloca,idprovi" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="entidad_localidad_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.localidad" table="public.entidad">
+	<columns names="idloca,idprovi" ref-type="src-columns"/>
+	<columns names="idloca,idprovi" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="emplado_pesona_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.persona" table="public.empleado">
+	<columns names="tipodocu,nrodocu" ref-type="src-columns"/>
+	<columns names="tipodocu,nrodocu" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="tiene_actuacion_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.actuacion" table="public.tiene">
+	<columns names="anioactua,nroactua" ref-type="src-columns"/>
+	<columns names="anioactua,nroactua" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="tiene_tematica" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.tematica" table="public.tiene">
+	<columns names="idtema" ref-type="src-columns"/>
+	<columns names="idtema" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="oficina_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.nivel" table="public.oficina">
+	<columns names="idnivel" ref-type="src-columns"/>
+	<columns names="idnivel" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="oficina_fk2" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.oficina" table="public.oficina">
+	<columns names="idofi_fk,idnivel_fk" ref-type="src-columns"/>
+	<columns names="idofi,idnivel" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="persona_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.persona" table="public.presenta_persona">
+	<columns names="tipodocu,nrodocu" ref-type="src-columns"/>
+	<columns names="tipodocu,nrodocu" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="actuacion_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.actuacion" table="public.presenta_persona">
+	<columns names="nroactua,anioactua" ref-type="src-columns"/>
+	<columns names="nroactua,anioactua" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="actuacion_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.actuacion" table="public.presenta_entidad">
+	<columns names="nroactua,anioactua" ref-type="src-columns"/>
+	<columns names="nroactua,anioactua" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="entidad_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.entidad" table="public.presenta_entidad">
+	<columns names="identidad" ref-type="src-columns"/>
+	<columns names="identidad" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="actuacion_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.actuacion" table="public.movimiento">
+	<columns names="nroactua,anioactua" ref-type="src-columns"/>
+	<columns names="nroactua,anioactua" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="oficina_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.oficina" table="public.movimiento">
+	<columns names="idofi,idnivel" ref-type="src-columns"/>
+	<columns names="idofi,idnivel" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="trabaja_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.empleado" table="public.trabaja">
+	<columns names="idemple" ref-type="src-columns"/>
+	<columns names="idemple" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="oficina_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.oficina" table="public.trabaja">
+	<columns names="idofi,idnivel" ref-type="src-columns"/>
+	<columns names="idofi,idnivel" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="empleado_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.empleado" table="public.atiende">
+	<columns names="idemple" ref-type="src-columns"/>
+	<columns names="idemple" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="empleado_fk2" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.movimiento" table="public.atiende">
+	<columns names="nromov,nroactua,anioactua" ref-type="src-columns"/>
+	<columns names="nromov,nroactua,anioactua" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_actuacion_actuacion" type="relfk" layers="0"
+	 custom-color="#2d6946"
+	 src-table="public.actuacion"
+	 dst-table="public.actuacion" reference-fk="actuacion_glose_fk"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="374.015" y="183.508"/>
+	<position x="374.015" y="87"/>
+	<position x="247.343" y="87"/>
+	</line>
+</relationship>
+
+<relationship name="rel_localidad_provincia" type="relfk" layers="0"
+	 custom-color="#c8bb2a"
+	 src-table="public.localidad"
+	 dst-table="public.provincia" reference-fk="localidad_provincia_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_persona_localidad" type="relfk" layers="0"
+	 custom-color="#86ca6b"
+	 src-table="public.persona"
+	 dst-table="public.localidad" reference-fk="persona_localidad_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_entidad_localidad" type="relfk" layers="0"
+	 custom-color="#3f106f"
+	 src-table="public.entidad"
+	 dst-table="public.localidad" reference-fk="entidad_localidad_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_empleado_persona" type="relfk" layers="0"
+	 custom-color="#de219e"
+	 src-table="public.empleado"
+	 dst-table="public.persona" reference-fk="emplado_pesona_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_tiene_actuacion" type="relfk" layers="0"
+	 custom-color="#16c8c9"
+	 src-table="public.tiene"
+	 dst-table="public.actuacion" reference-fk="tiene_actuacion_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_tiene_tematica" type="relfk" layers="0"
+	 custom-color="#155373"
+	 src-table="public.tiene"
+	 dst-table="public.tematica" reference-fk="tiene_tematica"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_oficina_nivel" type="relfk" layers="0"
+	 custom-color="#7ba8a3"
+	 src-table="public.oficina"
+	 dst-table="public.nivel" reference-fk="oficina_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_oficina_oficina" type="relfk" layers="0"
+	 custom-color="#ae7de7"
+	 src-table="public.oficina"
+	 dst-table="public.oficina" reference-fk="oficina_fk2"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="1434.79" y="1026.11"/>
+	<position x="1434.79" y="907"/>
+	<position x="1321.2" y="907"/>
+	</line>
+</relationship>
+
+<relationship name="rel_presenta_persona_persona" type="relfk" layers="0"
+	 custom-color="#1851eb"
+	 src-table="public.presenta_persona"
+	 dst-table="public.persona" reference-fk="persona_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_presenta_persona_actuacion" type="relfk" layers="0"
+	 custom-color="#841888"
+	 src-table="public.presenta_persona"
+	 dst-table="public.actuacion" reference-fk="actuacion_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_presenta_entidad_actuacion" type="relfk" layers="0"
+	 custom-color="#7e2eb9"
+	 src-table="public.presenta_entidad"
+	 dst-table="public.actuacion" reference-fk="actuacion_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_presenta_entidad_entidad" type="relfk" layers="0"
+	 custom-color="#bece5f"
+	 src-table="public.presenta_entidad"
+	 dst-table="public.entidad" reference-fk="entidad_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_movimiento_actuacion" type="relfk" layers="0"
+	 custom-color="#37258e"
+	 src-table="public.movimiento"
+	 dst-table="public.actuacion" reference-fk="actuacion_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_movimiento_oficina" type="relfk" layers="0"
+	 custom-color="#5fce3c"
+	 src-table="public.movimiento"
+	 dst-table="public.oficina" reference-fk="oficina_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_trabaja_empleado" type="relfk" layers="0"
+	 custom-color="#54c1a0"
+	 src-table="public.trabaja"
+	 dst-table="public.empleado" reference-fk="trabaja_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_trabaja_oficina" type="relfk" layers="0"
+	 custom-color="#ed5343"
+	 src-table="public.trabaja"
+	 dst-table="public.oficina" reference-fk="oficina_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_atiende_empleado" type="relfk" layers="0"
+	 custom-color="#14820d"
+	 src-table="public.atiende"
+	 dst-table="public.empleado" reference-fk="empleado_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_atiende_movimiento" type="relfk" layers="0"
+	 custom-color="#ff7f68"
+	 src-table="public.atiende"
+	 dst-table="public.movimiento" reference-fk="empleado_fk2"
+	 src-required="false" dst-required="true"/>
+
+<permission>
+	<object name="public" type="schema"/>
+	<roles names="pg_database_owner"/>
+	<privileges create="true" usage="true"/>
+</permission>
+<permission>
+	<object name="public" type="schema"/>
+	<privileges usage="true"/>
+</permission>
+</dbmodel>

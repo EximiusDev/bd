@@ -1,0 +1,19 @@
+
+Clientes IDE para Bases de Datos
+
+
+DBeaver
+Para las conexiones a las bases de datos que utilizaremos en la materia recomendamos DBeaver, que tiene la posibilidad de hacerlo a varios motores, entre ellos SQL Server y PostgreSQL, que se utilizarán en la materia.
+
+Descarga: https://dbeaver.io/download/
+Wiki: https://github.com/dbeaver/dbeaver/wiki
+Ambiente y Pantallas: https://github.com/dbeaver/dbeaver/wiki/Application-Window-Overview
+Proceso de Instalación con capturas de pantallas: https://saplearners.com/how-to-install-dbeaver-community-edition/
+Crear conexión a base de datos: https://github.com/dbeaver/dbeaver/wiki/Create-Connection 
+
+En caso de preferir trabajar en cada motor con su IDE propia, los enlaces son:
+
+SQL Server Management Studio
+Descarga:  https://learn.microsoft.com/es-es/sql/ssms/download-sql-server-management-studio-ssms
+PGAdmin 4
+Descarga: https://www.pgadmin.org/download/pgadmin-4-windows/

@@ -1,0 +1,11 @@
+Motores de Bases de Datos
+
+PostgreSQL
+En la cátedra utilizaremos la VERSIÓN 14
+
+Descarga para Windows: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+Descarga para Linux: https://www.postgresql.org/download/linux/
+Documentation: https://www.postgresql.org/docs/
+Microsoft SQL Server
+Descarga versión Express (edición Gratuita para uso NO comercial): https://www.microsoft.com/es-ar/sql-server/sql-server-downloads
+Documentación: https://learn.microsoft.com/es-mx/sql/sql-server/
